@@ -7,6 +7,11 @@ const app = express();
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(express.static(__dirname));
 
+app.get("/", (req, res) => {
+  res.send("SERVER AKTIF 🚀 Sistem Formatter Alamat Siap");
+});
+
+
 /* ================= UTIL ================= */
 
 function cleanPhone(phone) {
