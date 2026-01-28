@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Courier Address Formatter</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    textarea { width: 100%; height: 250px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+<h2>COURIER ADDRESS FORMATTER</h2>
+
+<textarea id="rawData" placeholder="Paste data transaksi di sini..."></textarea>
+<br>
+<button onclick="processData()">PROCESS</button>
+
+<script>
+async function processData() {
+  const raw = document.getElementById("rawData").value;
+
+  const response = await fetch("/process", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ data: raw })
+  });
+
+  const blob = await response.blob();
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "hasil_kurir.xlsx";
+  a.click();
+}
+</script>
+
+</body>
+</html>
